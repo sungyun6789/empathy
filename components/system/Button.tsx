@@ -4,7 +4,12 @@ import { COLORS } from '~/lib/colors';
 
 import type { ButtonHTMLAttributes } from 'react';
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement>;
+interface ButtonProps {
+  width?: number | string;
+  height?: number | string;
+}
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonProps {}
 
 const Button = ({ ...rest }: Props) => {
   return <StyledButton {...rest} />;
@@ -12,9 +17,9 @@ const Button = ({ ...rest }: Props) => {
 
 export default Button;
 
-const StyledButton = styled.button`
-  width: 80px;
-  height: 33px;
+const StyledButton = styled.button<ButtonProps>`
+  width: ${(props) => props.width ?? '80px'};
+  height: ${(props) => props.height ?? '35px'};
   font-size: 14px;
   color: white;
   background-color: ${COLORS.primary};

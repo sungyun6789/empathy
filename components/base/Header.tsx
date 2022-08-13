@@ -8,7 +8,9 @@ import Button from '../system/Button';
 const Header = () => {
   return (
     <Block>
-      <Title>공감</Title>
+      <Link href="/">
+        <Title>공감</Title>
+      </Link>
       <Link href="/login">
         <a>
           <Button>로그인</Button>
@@ -35,4 +37,5 @@ const Title = styled.div`
   color: ${COLORS.primary};
   font-size: 20px;
   font-weight: 700;
+  cursor: pointer;
 `;

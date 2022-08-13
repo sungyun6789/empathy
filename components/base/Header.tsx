@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { COLORS } from '~/lib/colors';
@@ -8,7 +9,11 @@ const Header = () => {
   return (
     <Block>
       <Title>공감</Title>
-      <Button>로그인</Button>
+      <Link href="/login">
+        <a>
+          <Button>로그인</Button>
+        </a>
+      </Link>
     </Block>
   );
 };

@@ -18,7 +18,7 @@ export default CardList;
 
 const List = styled.div`
   max-width: 1700px;
-  margin: 50px auto auto;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
 `;

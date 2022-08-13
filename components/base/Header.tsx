@@ -26,6 +26,7 @@ const Block = styled.header`
   align-items: center;
   height: 60px;
   padding: 0 20px;
+  margin-bottom: 50px;
   border-bottom: 1px solid ${COLORS.gray0};
   box-sizing: border-box;
 `;

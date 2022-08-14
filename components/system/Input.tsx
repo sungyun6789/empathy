@@ -13,12 +13,15 @@ const Input = ({ ...rest }: Props) => {
 export default Input;
 
 const StyledInput = styled.input`
-  width: 220px;
-  height: 24px;
+  width: 100%;
+  height: 40px;
   border: 1px solid ${COLORS.gray1};
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-size: 14px;
 
   &:focus {
     outline: none;
-    border: 2px solid ${COLORS.primary};
+    border: 1px solid ${COLORS.primary};
   }
 `;

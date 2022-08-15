@@ -1,4 +1,7 @@
+import axios from 'axios';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 import { COLORS } from '~/lib/colors';
@@ -35,14 +38,19 @@ const AUTH_DESCRIPTIONS = {
 } as const;
 
 const AuthForm = ({ mode }: Props) => {
+  const router = useRouter();
   const { usernamePlaceholder, passwordPlaceholder, buttonText, question, actionLink } = AUTH_DESCRIPTIONS[mode];
+
+  const { mutate } = useMutation((form: AuthForm) => axios.post(`api/auth/${mode}`, form), {
+    onSuccess: () => {
+      return router.push(actionLink);
+    },
+  });
 
   const { handleChange, handleSubmit } = useFormik<AuthForm>({
     initialValues: { username: '', password: '' },
     onSubmit: (formValue) => {
-      /** TODO: mode에 따라서 api call */
-      console.log(formValue);
-      return undefined;
+      return mutate(formValue);
     },
   });
 

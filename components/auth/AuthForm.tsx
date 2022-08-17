@@ -43,7 +43,7 @@ const AuthForm = ({ mode }: Props) => {
 
   const { mutate } = useMutation((form: AuthForm) => axios.post(`api/auth/${mode}`, form), {
     onSuccess: () => {
-      return router.push(actionLink);
+      return router.push(mode === 'login' ? '/' : '/login');
     },
   });
 
@@ -64,7 +64,7 @@ const AuthForm = ({ mode }: Props) => {
 
         <InputGroup>
           <Label>Password</Label>
-          <Input name="password" onChange={handleChange} placeholder={passwordPlaceholder} />
+          <Input name="password" type="password" onChange={handleChange} placeholder={passwordPlaceholder} />
         </InputGroup>
 
         <Button width="100%" type="submit">

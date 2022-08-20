@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { COLORS } from '~/lib/colors';
 
-import Button from '../system/Button';
+import AuthButton from '../auth/AuthButton';
 
 const Header = () => {
   return (
@@ -11,11 +11,7 @@ const Header = () => {
       <Link href="/">
         <Title>공감</Title>
       </Link>
-      <Link href="/login">
-        <a>
-          <Button>로그인</Button>
-        </a>
-      </Link>
+      <AuthButton />
     </Block>
   );
 };

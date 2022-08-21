@@ -1,7 +1,5 @@
 import { createContext } from 'react';
 
-interface User {
-  username: string;
-}
+import type { User } from '@prisma/client';
 
 export const UserContext = createContext<User | undefined>(undefined);

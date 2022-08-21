@@ -1,15 +1,19 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
+import { UserContext } from 'contexts/UserContext';
 import { COLORS } from '~/lib/colors';
 
 import Button from '../system/Button';
 import Input from '../system/Input';
 
 import QuestionLink from './QuestionLink';
+
+import type { User } from '@prisma/client';
 
 interface Props {
   mode: 'login' | 'register';
@@ -39,11 +43,17 @@ const AUTH_DESCRIPTIONS = {
 
 const AuthForm = ({ mode }: Props) => {
   const router = useRouter();
+  const user = useContext(UserContext);
   const { usernamePlaceholder, passwordPlaceholder, buttonText, question, actionLink } = AUTH_DESCRIPTIONS[mode];
 
-  const { mutate } = useMutation((form: AuthForm) => axios.post(`api/auth/${mode}`, form), {
-    onSuccess: () => {
-      return router.push(mode === 'login' ? '/' : '/login');
+  const { mutate } = useMutation((form: AuthForm) => axios.post<unknown, User>(`api/auth/${mode}`, form), {
+    onSuccess: (response) => {
+      if (mode === 'login') {
+        user.setState(response);
+        return router.push('/');
+      } else {
+        return router.push('/login');
+      }
     },
   });
 

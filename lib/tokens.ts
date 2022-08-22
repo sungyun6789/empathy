@@ -6,6 +6,7 @@ interface TokenPayload {
   type: 'access_token' | 'refresh_token';
   username: string;
   password: string;
+  tokenId: number;
 }
 
 const TOKEN_EXPIRES = {

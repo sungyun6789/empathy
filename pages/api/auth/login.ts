@@ -18,24 +18,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (isValidPassword) {
+        const token = await prisma.token.create({
+          data: {
+            userId: user.id,
+          },
+        });
+
+        const tokenId = token.id;
+
         const [accessToken, refreshToken] = await Promise.all([
           generateToken({
             type: 'access_token',
             username,
             password,
+            tokenId,
           }),
           generateToken({
             type: 'refresh_token',
             username,
             password,
+            tokenId,
           }),
         ]);
-
-        await prisma.token.create({
-          data: {
-            userId: user.id,
-          },
-        });
 
         res.setHeader('Set-Cookie', [
           `access_token=${accessToken}; httpOnly; path=/; secure; expires=${new Date(

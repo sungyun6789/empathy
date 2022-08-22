@@ -9,6 +9,11 @@ interface TokenPayload {
   tokenId: number;
 }
 
+interface DecodedToken extends TokenPayload {
+  iat: number;
+  exp: number;
+}
+
 const TOKEN_EXPIRES = {
   access_token: '1h',
   refresh_token: '30d',
@@ -26,5 +31,13 @@ export const generateToken = (payload: TokenPayload) => {
         return error || !token ? reject(error) : resolve(token);
       },
     );
+  });
+};
+
+export const validateToken = (token: string) => {
+  return new Promise<DecodedToken>((resolve, reject) => {
+    jwt.verify(token, JWT_SECRET, (error, decoded) => {
+      return error ? reject(error) : resolve(decoded as DecodedToken);
+    });
   });
 };

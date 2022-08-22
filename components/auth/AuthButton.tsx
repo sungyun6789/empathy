@@ -10,9 +10,11 @@ import Button from '../system/Button';
 import type { User } from '@prisma/client';
 
 const AuthButton = () => {
-  const { state } = useContext(UserContext);
+  const { state, setState } = useContext(UserContext);
 
-  const { mutate } = useMutation((user: User) => axios.post('api/auth/logout', user));
+  const { mutate } = useMutation((user: User) => axios.post('api/auth/logout', user), {
+    onSuccess: () => setState(undefined),
+  });
 
   return state ? (
     <Button onClick={() => mutate(state)}>로그아웃</Button>

@@ -1,18 +1,16 @@
-import axios from 'axios';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
 
 import { UserContext } from 'contexts/UserContext';
+import { logout } from '~/lib/auth';
 
 import Button from '../system/Button';
-
-import type { User } from '@prisma/client';
 
 const AuthButton = () => {
   const { state, setState } = useContext(UserContext);
 
-  const { mutate } = useMutation((user: User) => axios.post('api/auth/logout', user), {
+  const { mutate } = useMutation(logout, {
     onSuccess: () => setState(undefined),
   });
 

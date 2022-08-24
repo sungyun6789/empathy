@@ -1,8 +1,17 @@
+import { useContext } from 'react';
+import { useQuery } from 'react-query';
+
+import { UserContext } from 'contexts/UserContext';
 import CardList from '~/components/home/CardList';
+import { getMyAccount } from '~/lib/auth';
 
-import type { NextPage } from 'next';
+const Home = () => {
+  const { setState } = useContext(UserContext);
 
-const Home: NextPage = () => {
+  useQuery(['/api/auth/me'], getMyAccount, {
+    onSuccess: (data) => setState(data),
+  });
+
   return <CardList />;
 };
 

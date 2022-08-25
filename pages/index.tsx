@@ -8,7 +8,7 @@ import { getMyAccount } from '~/lib/auth';
 const Home = () => {
   const { setState } = useContext(UserContext);
 
-  useQuery(['/api/auth/me'], getMyAccount, {
+  useQuery(['/auth/me'], getMyAccount, {
     onSuccess: (data) => setState(data),
   });
 

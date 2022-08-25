@@ -1,3 +1,5 @@
+import 'axios.setting';
+
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 

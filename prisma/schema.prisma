@@ -17,6 +17,7 @@ model User {
   createdAt DateTime @default(now())
 
   Token Token[]
+  Post  Post[]
 }
 
 model Token {
@@ -25,4 +26,15 @@ model Token {
   userId    Int
   createdAt DateTime @default(now())
   blocked   Boolean  @default(false)
+}
+
+model Post {
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String
+  url         String
 }

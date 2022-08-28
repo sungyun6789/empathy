@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
 
-import { UserContext } from 'contexts/UserContext';
 import CardList from '~/components/home/CardList';
+import { UserContext } from '~/contexts/UserContext';
 import { getMyAccount } from '~/lib/auth';
 
 const Home = () => {

@@ -4,7 +4,7 @@ import { useContext, useMemo } from 'react';
 import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
-import { UserContext } from 'contexts/UserContext';
+import { UserContext } from '~/contexts/UserContext';
 import { login, register } from '~/lib/auth';
 import { COLORS } from '~/lib/colors';
 

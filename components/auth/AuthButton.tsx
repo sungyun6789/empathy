@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
 
-import { UserContext } from 'contexts/UserContext';
+import { UserContext } from '~/contexts/UserContext';
 import { logout } from '~/lib/auth';
 
 import Button from '../system/Button';

@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
+import styled from 'styled-components';
 
 import { UserContext } from '~/contexts/UserContext';
 import { logout } from '~/lib/auth';
 
 import Button from '../system/Button';
+import WriteButton from '../write/WriteButton';
 
 const AuthButton = () => {
   const { state, setState } = useContext(UserContext);
@@ -15,7 +17,10 @@ const AuthButton = () => {
   });
 
   return state ? (
-    <Button onClick={() => mutate(state)}>로그아웃</Button>
+    <Block>
+      <WriteButton />
+      <Button onClick={() => mutate(state)}>로그아웃</Button>
+    </Block>
   ) : (
     <Link href="/login">
       <a>
@@ -26,3 +31,9 @@ const AuthButton = () => {
 };
 
 export default AuthButton;
+
+const Block = styled.div`
+  button:first-child {
+    margin-right: 5px;
+  }
+`;

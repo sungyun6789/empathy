@@ -14,12 +14,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      await prisma.token.update({
+      await prisma.token.delete({
         where: {
           id: token?.id,
-        },
-        data: {
-          blocked: true,
         },
       });
     }

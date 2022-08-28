@@ -22,7 +22,7 @@ const AuthButton = () => {
       <Button onClick={() => mutate(state)}>로그아웃</Button>
     </Block>
   ) : (
-    <Link href="/login">
+    <Link href="/auth/login">
       <a>
         <Button>로그인</Button>
       </a>

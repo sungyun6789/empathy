@@ -1,5 +1,7 @@
-const Write = () => {
-  return <div>index</div>;
+import WriteForm from '~/components/write/WriteForm';
+
+const write = () => {
+  return <WriteForm />;
 };
 
-export default Write;
+export default write;

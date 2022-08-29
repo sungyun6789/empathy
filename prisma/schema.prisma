@@ -33,7 +33,6 @@ model Post {
   userId      Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  title       String
   description String
   url         String
 }

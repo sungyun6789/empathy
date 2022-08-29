@@ -1,44 +1,52 @@
 import { useFormik } from 'formik';
+import styled from 'styled-components';
 
 import Button from '../system/Button';
 import Input from '../system/Input';
+import TextArea from '../system/TextArea';
 
 import type { Post } from '@prisma/client';
 
-type FormType = Pick<Post, 'title' | 'description' | 'url'>;
+type FormType = Pick<Post, 'description' | 'url'>;
 
 const WriteForm = () => {
   const { handleChange, handleSubmit } = useFormik<FormType>({
-    initialValues: {
-      title: '',
-      description: '',
-      url: '',
-    },
+    initialValues: { description: '', url: '' },
     onSubmit: (formValue) => console.log(formValue),
   });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <article>
-        <div>제목</div>
-        <Input name="title" onChange={handleChange} />
-      </article>
-
-      <article>
-        <div>설명</div>
-        <Input name="description" onChange={handleChange} />
-      </article>
-
-      <article>
-        <div>영상 주소</div>
+    <StyledForm onSubmit={handleSubmit}>
+      <InputGroup>
+        <Label>영상 주소</Label>
         <Input name="url" onChange={handleChange} />
-      </article>
+      </InputGroup>
+
+      <InputGroup>
+        <Label>설명</Label>
+        <TextArea name="description" onChange={handleChange} />
+      </InputGroup>
 
       <Button width="100%" type="submit">
         완료
       </Button>
-    </form>
+    </StyledForm>
   );
 };
 
 export default WriteForm;
+
+const StyledForm = styled.form`
+  max-width: 400px;
+  margin: auto;
+  padding: 30px;
+`;
+
+const InputGroup = styled.div`
+  margin-bottom: 30px;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+`;

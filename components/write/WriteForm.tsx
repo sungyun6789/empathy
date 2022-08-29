@@ -10,7 +10,7 @@ import type { Post } from '@prisma/client';
 type FormType = Pick<Post, 'description' | 'url'>;
 
 const WriteForm = () => {
-  const { handleChange, handleSubmit } = useFormik<FormType>({
+  const { values, handleChange, handleSubmit } = useFormik<FormType>({
     initialValues: { description: '', url: '' },
     onSubmit: (formValue) => console.log(formValue),
   });
@@ -23,8 +23,11 @@ const WriteForm = () => {
       </InputGroup>
 
       <InputGroup>
-        <Label>설명</Label>
-        <TextArea name="description" onChange={handleChange} />
+        <LabelGroup>
+          <Label>설명</Label>
+          <span>{`${values.description.length} / 50`}</span>
+        </LabelGroup>
+        <TextArea maxLength={50} name="description" onChange={handleChange} />
       </InputGroup>
 
       <Button width="100%" type="submit">
@@ -44,6 +47,11 @@ const StyledForm = styled.form`
 
 const InputGroup = styled.div`
   margin-bottom: 30px;
+`;
+
+const LabelGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Label = styled.label`

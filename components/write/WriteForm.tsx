@@ -5,9 +5,9 @@ import Button from '../system/Button';
 import Input from '../system/Input';
 import TextArea from '../system/TextArea';
 
-import type { Post } from '@prisma/client';
+import type { Item } from '@prisma/client';
 
-type FormType = Pick<Post, 'description' | 'url'>;
+type FormType = Pick<Item, 'description' | 'url'>;
 
 const WriteForm = () => {
   const { values, handleChange, handleSubmit } = useFormik<FormType>({

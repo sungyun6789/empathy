@@ -17,7 +17,7 @@ model User {
   createdAt DateTime @default(now())
 
   Token Token[]
-  Post  Post[]
+  Item  Item[]
 }
 
 model Token {
@@ -27,7 +27,7 @@ model Token {
   createdAt DateTime @default(now())
 }
 
-model Post {
+model Item {
   id          Int      @id @default(autoincrement())
   user        User     @relation(fields: [userId], references: [id])
   userId      Int

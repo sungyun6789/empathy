@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import CardList from '~/components/home/CardList';
 import { UserContext } from '~/contexts/UserContext';
 import { getMyAccount } from '~/lib/auth';
+import { cookieParser } from '~/lib/cookies';
 
 import type { NextPageContext } from 'next';
 
@@ -26,10 +27,7 @@ const Home = ({ accessToken, refreshToken }: Props) => {
 export default Home;
 
 export async function getServerSideProps(context: NextPageContext) {
-  const cookies = context.req?.headers.cookie?.split('; ');
-
-  const accessToken = cookies?.[0].split('access_token=')[1] ?? null;
-  const refreshToken = cookies?.[1].split('refresh_token=')[1] ?? null;
+  const { accessToken, refreshToken } = cookieParser(context.req?.headers.cookie);
 
   return {
     props: {

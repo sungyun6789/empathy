@@ -1,12 +1,14 @@
+export type CookieParserToken = { [key in 'access_token' | 'refresh_token']: string | null };
+
 /** token parsing in the cookie */
-export const cookieParser = (cookie: string | undefined) => {
+export const cookieParser = (cookie: string | undefined): CookieParserToken => {
   const cookies = cookie?.split('; ');
 
-  const accessToken = cookies?.[0].split('access_token=')[1] ?? null;
-  const refreshToken = cookies?.[1].split('refresh_token=')[1] ?? null;
+  if (cookies) {
+    const token: CookieParserToken = Object.fromEntries(cookies.map((value) => value.split('=')));
 
-  return {
-    accessToken,
-    refreshToken,
-  };
+    return { access_token: token.access_token ?? null, refresh_token: token.refresh_token ?? null };
+  } else {
+    return { access_token: null, refresh_token: null };
+  }
 };

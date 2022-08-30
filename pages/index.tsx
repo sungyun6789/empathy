@@ -7,18 +7,14 @@ import { getMyAccount } from '~/lib/auth';
 import { cookieParser } from '~/lib/cookies';
 
 import type { NextPageContext } from 'next';
+import type { CookieParserToken } from '~/lib/cookies';
 
-interface Props {
-  accessToken: string | null;
-  refreshToken: string | null;
-}
-
-const Home = ({ accessToken, refreshToken }: Props) => {
+const Home = ({ access_token, refresh_token }: CookieParserToken) => {
   const { setState } = useContext(UserContext);
 
   useQuery(['/auth/me'], getMyAccount, {
     onSuccess: (data) => setState(data),
-    enabled: !!(accessToken || refreshToken),
+    enabled: !!(access_token || refresh_token),
   });
 
   return <CardList />;
@@ -27,12 +23,12 @@ const Home = ({ accessToken, refreshToken }: Props) => {
 export default Home;
 
 export async function getServerSideProps(context: NextPageContext) {
-  const { accessToken, refreshToken } = cookieParser(context.req?.headers.cookie);
+  const { access_token, refresh_token } = cookieParser(context.req?.headers.cookie);
 
   return {
     props: {
-      accessToken,
-      refreshToken,
+      access_token,
+      refresh_token,
     },
   };
 }

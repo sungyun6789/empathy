@@ -1,5 +1,9 @@
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
+
+import { createItem } from '~/lib/items';
 
 import Button from '../system/Button';
 import Input from '../system/Input';
@@ -10,9 +14,14 @@ import type { Item } from '@prisma/client';
 type FormType = Pick<Item, 'description' | 'url'>;
 
 const WriteForm = () => {
+  const router = useRouter();
+  const { mutate } = useMutation(createItem, {
+    onSuccess: () => router.push('/'),
+  });
+
   const { values, handleChange, handleSubmit } = useFormik<FormType>({
     initialValues: { description: '', url: '' },
-    onSubmit: (formValue) => console.log(formValue),
+    onSubmit: (formValue) => mutate(formValue),
   });
 
   return (

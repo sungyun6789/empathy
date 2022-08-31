@@ -1,14 +1,19 @@
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
+
+import { getItems } from '~/lib/items';
 
 import Card from './Card';
 
 const CardList = () => {
-  const mock = new Array(13).fill(undefined);
+  const { data } = useQuery(['/items'], getItems, {
+    staleTime: Infinity,
+  });
 
   return (
     <List>
-      {mock.map((_, i) => (
-        <Card key={i} item={undefined} />
+      {data?.map((item, i) => (
+        <Card key={i} item={item} />
       ))}
     </List>
   );

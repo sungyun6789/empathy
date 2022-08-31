@@ -3,18 +3,17 @@ import styled from 'styled-components';
 
 import { COLORS } from '~/lib/colors';
 
+import type { Item } from '@prisma/client';
+
 interface Props {
-  item: unknown;
+  item: Item;
 }
 
 const Card = ({ item }: Props) => {
   return (
     <Block>
       <Thumbnail>{/** youtube banner */}</Thumbnail>
-      <Description>
-        이 노래는 자기 전에 듣기 좋으면서 잘 때도 듣고 꿈 꿀 때도 듣습니다. 이 노래는 자기 전에 듣기 좋으면서 잘 때도
-        듣고 꿈 꿀 때도 듣습니다.
-      </Description>
+      <Description>{item.description}</Description>
       <Footer>
         <div>
           <Image src="/like.svg" alt="like" width="12" height="11" />

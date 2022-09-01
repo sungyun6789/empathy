@@ -1,5 +1,6 @@
 import prisma from '~/lib/prisma';
 import { validateToken } from '~/lib/tokens';
+import { videoIdParser } from '~/lib/video';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -22,7 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         if (user) {
           const { description, url } = req.body;
-          const videoId = url;
+          const videoId = videoIdParser(url);
 
           await prisma.item.create({
             data: {

@@ -35,4 +35,5 @@ model Item {
   updatedAt   DateTime @updatedAt
   description String
   url         String
+  videoId     String
 }

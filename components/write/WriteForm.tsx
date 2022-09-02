@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
@@ -10,6 +11,7 @@ import Input from '../system/Input';
 import TextArea from '../system/TextArea';
 
 import type { Item } from '@prisma/client';
+import type { ErrorResponse } from '~/lib/error';
 
 type FormType = Pick<Item, 'description' | 'url'>;
 
@@ -17,6 +19,9 @@ const WriteForm = () => {
   const router = useRouter();
   const { mutate } = useMutation(createItem, {
     onSuccess: () => router.push('/'),
+    onError: (error: ErrorResponse) => {
+      toast.error(error.response?.data.error ?? '알 수 없는 에러가 발생했습니다.');
+    },
   });
 
   const { values, handleChange, handleSubmit } = useFormik<FormType>({

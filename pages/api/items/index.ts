@@ -24,6 +24,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         if (user) {
           const { description, url } = req.body;
           const videoId = videoIdParser(url);
+          if (!videoId) {
+            return res.status(400).json({ error: '유튜브 주소가 아닙니다.' });
+          }
 
           await prisma.item.create({
             data: {

@@ -1,5 +1,6 @@
 import 'axios.setting';
 
+import { Toaster } from 'react-hot-toast';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
@@ -17,6 +18,7 @@ const _app = ({ Component, pageProps }: AppProps) => {
         <BasicLayout>
           <GlobalStyle />
           <Component {...pageProps} />
+          <Toaster />
         </BasicLayout>
         <ReactQueryDevtools />
       </UserProvider>

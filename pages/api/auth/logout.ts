@@ -1,3 +1,4 @@
+import { setCookies } from '~/lib/cookies';
 import prisma from '~/lib/prisma';
 import { validateToken } from '~/lib/tokens';
 
@@ -20,9 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
     }
-
-    res.setHeader('Set-Cookie', [`access_token=; path=/; expires=-1;`, `refresh_token=; path=/; expires=-1;`]);
-
+    setCookies({ res, type: 'logout' });
     return res.status(200).json(undefined);
   } catch (error) {
     console.log(error);

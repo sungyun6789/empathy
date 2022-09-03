@@ -1,3 +1,4 @@
+import { setCookies } from '~/lib/cookies';
 import { generateToken, validateToken } from '~/lib/tokens';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -14,12 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (req.cookies.refresh_token) {
         const { username, password, tokenId } = await validateToken(req.cookies.refresh_token);
         const accessToken = await generateToken({ type: 'access_token', username, password, tokenId });
-
-        res.setHeader('Set-Cookie', [
-          `access_token=${accessToken}; httpOnly; path=/; secure; expires=${new Date(
-            Date.now() + 1000 * 60 * 60,
-          ).toUTCString()};`,
-        ]);
+        setCookies({ res, type: 'me', accessToken });
         return res.status(200).json({ username, password });
       } else {
         return res.status(200).json(undefined);

@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 
+import { setCookies } from '~/lib/cookies';
 import prisma from '~/lib/prisma';
 import { generateToken } from '~/lib/tokens';
 
@@ -40,16 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             tokenId,
           }),
         ]);
-
-        res.setHeader('Set-Cookie', [
-          `access_token=${accessToken}; httpOnly; path=/; secure; expires=${new Date(
-            Date.now() + 1000 * 60 * 60,
-          ).toUTCString()};`,
-          `refresh_token=${refreshToken}; httpOnly; path=/; secure; expires=${new Date(
-            Date.now() + 1000 * 60 * 60 * 24 * 7,
-          ).toUTCString()};`,
-        ]);
-
+        setCookies({ res, type: 'login', accessToken, refreshToken });
         return res.status(200).json(user);
       } else {
         return res.status(400).json({ error: 'Password do not match' });

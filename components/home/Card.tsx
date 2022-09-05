@@ -12,7 +12,9 @@ interface Props {
 const Card = ({ item }: Props) => {
   return (
     <Block>
-      <Thumbnail>{/** youtube banner */}</Thumbnail>
+      {/** 썸네일 해상도: https://stackoverflow.com/questions/18681788/how-to-get-a-youtube-thumbnail-from-a-youtube-iframe */}
+      <Thumbnail src={`https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg`} />
+
       <Description>{item.description}</Description>
       <Footer>
         <div>
@@ -35,9 +37,11 @@ const Block = styled.article`
   margin: 10px;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.iframe`
+  width: 100%;
   height: 152px;
-  border-bottom: 1px solid ${COLORS.gray0};
+  object-fit: contain;
+  border: none;
 `;
 
 const Description = styled.div`

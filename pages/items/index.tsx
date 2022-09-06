@@ -1,7 +1,7 @@
 import CardDetail from '~/components/home/CardDetail';
 
 const items = () => {
-  <CardDetail />;
+  return <CardDetail />;
 };
 
 export default items;

@@ -7,7 +7,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'GET') {
-      const items = await prisma.item.findMany();
+      const items = await prisma.item.findMany({
+        select: {
+          id: true,
+          description: true,
+          videoId: true,
+        },
+      });
+
       return res.status(200).json(items);
     }
 

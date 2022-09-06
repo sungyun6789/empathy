@@ -7,7 +7,7 @@ import { COLORS } from '~/lib/colors';
 import type { Item } from '@prisma/client';
 
 interface Props {
-  item: Item;
+  item: Pick<Item, 'id' | 'description' | 'videoId'>;
 }
 
 const Card = ({ item }: Props) => {

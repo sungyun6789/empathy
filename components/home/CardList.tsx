@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
-import { getItems } from '~/lib/items';
+import { getItems } from '~/lib/api/items';
 
 import Card from './Card';
 

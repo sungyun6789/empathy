@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 import { UserContext } from '~/contexts/UserContext';
-import { logout } from '~/lib/auth';
+import { logout } from '~/lib/api/auth';
 
 import Button from '../system/Button';
 import WriteButton from '../write/WriteButton';

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import CardList from '~/components/home/CardList';
 import { UserContext } from '~/contexts/UserContext';
-import { getMyAccount } from '~/lib/auth';
+import { getMyAccount } from '~/lib/api/auth';
 import { cookieParser } from '~/lib/cookies';
 
 import type { NextPageContext } from 'next';

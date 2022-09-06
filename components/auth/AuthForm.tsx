@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 import { UserContext } from '~/contexts/UserContext';
-import { login, register } from '~/lib/auth';
+import { login, register } from '~/lib/api/auth';
 import { COLORS } from '~/lib/colors';
 
 import Button from '../system/Button';

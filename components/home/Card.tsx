@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { COLORS } from '~/lib/colors';
@@ -11,18 +12,21 @@ interface Props {
 
 const Card = ({ item }: Props) => {
   return (
-    <Block>
-      {/** 썸네일 해상도: https://stackoverflow.com/questions/18681788/how-to-get-a-youtube-thumbnail-from-a-youtube-iframe */}
-      <Thumbnail src={`https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg`} />
-
-      <Description>{item.description}</Description>
-      <Footer>
-        <div>
-          <Image src="/like.svg" alt="like" width="12" height="11" />
-        </div>
-        <CountBlock>0</CountBlock>
-      </Footer>
-    </Block>
+    <Link href={`/items/?id=${item.id}`}>
+      <Anchor>
+        <Block>
+          {/** 썸네일 해상도: https://stackoverflow.com/questions/18681788/how-to-get-a-youtube-thumbnail-from-a-youtube-iframe */}
+          <Thumbnail src={`https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg`} />
+          <Description>{item.description}</Description>
+          <Footer>
+            <div>
+              <Image src="/like.svg" alt="like" width="12" height="11" />
+            </div>
+            <CountBlock>0</CountBlock>
+          </Footer>
+        </Block>
+      </Anchor>
+    </Link>
   );
 };
 
@@ -35,12 +39,15 @@ const Block = styled.article`
   box-sizing: border-box;
   border: 1px solid ${COLORS.gray0};
   margin: 10px;
+  cursor: pointer;
 `;
 
-const Thumbnail = styled.iframe`
+/** styled component를 사용하면 기본 a tag의 스타일이 들어가지 않음 */
+const Anchor = styled.a``;
+
+const Thumbnail = styled.img`
   width: 100%;
   height: 152px;
-  object-fit: contain;
   border: none;
 `;
 

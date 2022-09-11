@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
@@ -6,9 +7,11 @@ import { getItems } from '~/lib/api/items';
 import Card from './Card';
 
 const CardList = () => {
-  const { data } = useQuery(['/items'], getItems, {
-    staleTime: Infinity,
-  });
+  const { data, refetch } = useQuery(['/items'], getItems);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <List>

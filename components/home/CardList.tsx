@@ -27,6 +27,8 @@ export default CardList;
 const List = styled.div`
   max-width: 1700px;
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 5px;
+  place-items: center;
 `;

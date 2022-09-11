@@ -12,9 +12,9 @@ interface Props {
 
 const Card = ({ item }: Props) => {
   return (
-    <Link href={`/items/?id=${item.id}`}>
-      <Anchor>
-        <Block>
+    <Block>
+      <Link href={`/items/?id=${item.id}`}>
+        <Anchor>
           {/** 썸네일 해상도: https://stackoverflow.com/questions/18681788/how-to-get-a-youtube-thumbnail-from-a-youtube-iframe */}
           <Thumbnail src={`https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg`} />
           <Description>{item.description}</Description>
@@ -24,9 +24,9 @@ const Card = ({ item }: Props) => {
             </div>
             <CountBlock>0</CountBlock>
           </Footer>
-        </Block>
-      </Anchor>
-    </Link>
+        </Anchor>
+      </Link>
+    </Block>
   );
 };
 

@@ -13,6 +13,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           description: true,
           videoId: true,
         },
+        orderBy: {
+          createdAt: 'desc',
+        },
       });
 
       return res.status(200).json(items);

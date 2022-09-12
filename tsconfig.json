@@ -19,7 +19,8 @@
       "~/components/*": ["components/*"],
       "~/styles/*": ["styles/*"],
       "~/lib/*": ["lib/*"],
-      "~/contexts/*": ["contexts/*"]
+      "~/contexts/*": ["contexts/*"],
+      "~/hooks/*": ["hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

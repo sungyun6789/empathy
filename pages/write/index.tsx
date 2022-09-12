@@ -1,7 +1,30 @@
+import useUser from 'hooks/useUser';
 import WriteForm from '~/components/write/WriteForm';
+import { cookieParser } from '~/lib/cookies';
 
-const write = () => {
+import type { NextPageContext } from 'next';
+import type { CookieParserToken } from '~/lib/cookies';
+
+interface Props {
+  access_token: CookieParserToken['access_token'];
+  refresh_token: CookieParserToken['refresh_token'];
+}
+
+const write = ({ access_token, refresh_token }: Props) => {
+  useUser({ access_token, refresh_token });
+
   return <WriteForm />;
 };
 
 export default write;
+
+export async function getServerSideProps(context: NextPageContext) {
+  const { access_token, refresh_token } = cookieParser(context.req?.headers.cookie);
+
+  return {
+    props: {
+      access_token,
+      refresh_token,
+    },
+  };
+}

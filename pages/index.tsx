@@ -1,21 +1,17 @@
-import { useContext } from 'react';
-import { useQuery } from 'react-query';
-
+import useUser from 'hooks/useUser';
 import CardList from '~/components/home/CardList';
-import { UserContext } from '~/contexts/UserContext';
-import { getMyAccount } from '~/lib/api/auth';
 import { cookieParser } from '~/lib/cookies';
 
 import type { NextPageContext } from 'next';
 import type { CookieParserToken } from '~/lib/cookies';
 
-const Home = ({ access_token, refresh_token }: CookieParserToken) => {
-  const { setState } = useContext(UserContext);
+interface Props {
+  access_token: CookieParserToken['access_token'];
+  refresh_token: CookieParserToken['refresh_token'];
+}
 
-  useQuery(['/auth/me'], getMyAccount, {
-    onSuccess: (data) => setState(data),
-    enabled: !!(access_token || refresh_token),
-  });
+const Home = ({ access_token, refresh_token }: Props) => {
+  useUser({ access_token, refresh_token });
 
   return <CardList />;
 };

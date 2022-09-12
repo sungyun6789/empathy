@@ -36,4 +36,16 @@ model Item {
   description String
   url         String
   videoId     String
+
+  ItemLike ItemLike[]
+}
+
+model ItemLike {
+  id     Int  @id @default(autoincrement())
+  itemId Int  @unique
+  userId Int
+  likes  Int  @default(0)
+  item   Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, userId])
 }

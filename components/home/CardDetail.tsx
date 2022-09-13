@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { getItemDetails } from '~/lib/api/items';
 
+import LikeButton from '../system/LikeButton';
+
 const CardDetail = () => {
   const { query } = useRouter();
   const id = query.id as string;
@@ -13,18 +15,21 @@ const CardDetail = () => {
   });
 
   return (
-    <Block>
-      <div>
-        <Description>{data?.description}</Description>
-        <Video
-          src={`https://www.youtube.com/embed/${data?.videoId}`}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
-    </Block>
+    <>
+      <Block>
+        <div>
+          <Description>{data?.description}</Description>
+          <Video
+            src={`https://www.youtube.com/embed/${data?.videoId}`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </Block>
+      <LikeButton />
+    </>
   );
 };
 

@@ -1,14 +1,29 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
-const LikeButton = () => {
+import { likeItem } from '~/lib/api/items';
+
+interface Props {
+  like: number;
+}
+
+const LikeButton = ({ like }: Props) => {
+  const { query } = useRouter();
+  const id = query.id;
+
+  if (!id || typeof id !== 'string') return null;
+
+  const { mutate } = useMutation(likeItem);
+
   return (
     <Block>
       <div>
-        <LikeIconWrapper>
-          <Image src="/like.svg" alt="like" width="17" height="17" color="red" />
+        <LikeIconWrapper onClick={() => mutate(id)}>
+          <Image src="/like.svg" alt="like" width="17" height="17" />
         </LikeIconWrapper>
-        <LikeCount>좋아요 123개</LikeCount>
+        <LikeCount>좋아요 {like}개</LikeCount>
       </div>
     </Block>
   );

@@ -10,7 +10,7 @@ const CardDetail = () => {
   const { query } = useRouter();
   const id = query.id as string;
 
-  const { data } = useQuery(['/items', id], () => getItemDetails(id), {
+  const { data } = useQuery([`/items/${id}`], () => getItemDetails(id), {
     enabled: !!id,
   });
 
@@ -28,7 +28,7 @@ const CardDetail = () => {
           />
         </div>
       </Block>
-      <LikeButton />
+      <LikeButton like={data?.like} />
     </>
   );
 };

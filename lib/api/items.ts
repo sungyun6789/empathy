@@ -17,3 +17,5 @@ export const getItemDetails = async (id: string) => {
   const { data } = await axios.get<Item>(`/items/${id}`);
   return data;
 };
+
+export const likeItem = async (id: string) => await axios.post(`/items/${id}/like`);

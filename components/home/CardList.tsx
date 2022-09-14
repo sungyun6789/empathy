@@ -25,7 +25,6 @@ const CardList = () => {
 export default CardList;
 
 const List = styled.div`
-  max-width: 1700px;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

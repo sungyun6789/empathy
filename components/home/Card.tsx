@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import { COLORS } from '~/lib/colors';
 
-import type { Item } from '@prisma/client';
+import type { ItemModel } from '~/lib/api/items';
 
 interface Props {
-  item: Pick<Item, 'id' | 'description' | 'videoId'> & { itemLikes: number };
+  item: ItemModel;
 }
 
 const Card = ({ item }: Props) => {

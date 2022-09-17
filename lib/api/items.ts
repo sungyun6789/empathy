@@ -4,7 +4,9 @@ import type { Item } from '@prisma/client';
 
 type CreateItemParams = Pick<Item, 'description' | 'url'>;
 
-type GetItems = Pick<Item, 'id' | 'description' | 'videoId'> & { itemLikes: number };
+export interface ItemModel extends Pick<Item, 'id' | 'description' | 'videoId'> {
+  itemLikes: number;
+}
 
 interface ItemDetail extends Item {
   likes: number;
@@ -13,7 +15,7 @@ interface ItemDetail extends Item {
 export const createItem = async (params: CreateItemParams) => await axios.post('/items', params);
 
 export const getItems = async () => {
-  const { data } = await axios.get<GetItems[]>('/items');
+  const { data } = await axios.get<ItemModel[]>('/items');
   return data;
 };
 

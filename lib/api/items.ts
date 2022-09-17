@@ -6,6 +6,10 @@ type CreateItemParams = Pick<Item, 'description' | 'url'>;
 
 type GetItems = Pick<Item, 'id' | 'description' | 'videoId'>;
 
+interface ItemDetail extends Item {
+  likes: number;
+}
+
 export const createItem = async (params: CreateItemParams) => await axios.post('/items', params);
 
 export const getItems = async () => {
@@ -14,7 +18,7 @@ export const getItems = async () => {
 };
 
 export const getItemDetails = async (id: string) => {
-  const { data } = await axios.get<Item>(`/items/${id}`);
+  const { data } = await axios.get<ItemDetail>(`/items/${id}`);
   return data;
 };
 

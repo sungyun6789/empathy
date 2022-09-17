@@ -11,7 +11,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             id: +req.query.id,
           },
         });
-        return res.status(200).json(item);
+        const likes = await prisma.itemLike.count({
+          where: {
+            itemId: item?.id,
+          },
+        });
+        return res.status(200).json({ ...item, likes });
       }
     }
   } catch {

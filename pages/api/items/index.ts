@@ -12,13 +12,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: true,
           description: true,
           videoId: true,
+          itemLikes: true,
         },
         orderBy: {
           createdAt: 'desc',
         },
       });
 
-      return res.status(200).json(items);
+      const data = items.map((item) => ({ ...item, itemLikes: item.itemLikes.length }));
+
+      return res.status(200).json(data);
     }
 
     if (req.method === 'POST') {

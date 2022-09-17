@@ -7,7 +7,7 @@ import { COLORS } from '~/lib/colors';
 import type { Item } from '@prisma/client';
 
 interface Props {
-  item: Pick<Item, 'id' | 'description' | 'videoId'>;
+  item: Pick<Item, 'id' | 'description' | 'videoId'> & { itemLikes: number };
 }
 
 const Card = ({ item }: Props) => {
@@ -22,7 +22,7 @@ const Card = ({ item }: Props) => {
             <div>
               <Image src="/like.svg" alt="like" width="12" height="11" />
             </div>
-            <CountBlock>0</CountBlock>
+            <CountBlock>{item.itemLikes}</CountBlock>
           </Footer>
         </Anchor>
       </Link>

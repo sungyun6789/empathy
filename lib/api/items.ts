@@ -4,7 +4,7 @@ import type { Item } from '@prisma/client';
 
 type CreateItemParams = Pick<Item, 'description' | 'url'>;
 
-type GetItems = Pick<Item, 'id' | 'description' | 'videoId'>;
+type GetItems = Pick<Item, 'id' | 'description' | 'videoId'> & { itemLikes: number };
 
 interface ItemDetail extends Item {
   likes: number;

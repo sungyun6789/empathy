@@ -36,7 +36,7 @@ const CardDetail = () => {
           <LikeIconWrapper onClick={() => mutate(id)}>
             <Image src="/like.svg" alt="like" width="17" height="17" />
           </LikeIconWrapper>
-          <LikeCount>좋아요 {data?.like}개</LikeCount>
+          {/* <LikeCount>좋아요 {data?.like}개</LikeCount> */}
         </div>
       </LikeButton>
     </>

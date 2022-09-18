@@ -44,7 +44,7 @@ const WriteForm = () => {
         <TextArea maxLength={50} name="description" onChange={handleChange} />
       </InputGroup>
 
-      <Button width="100%" type="submit">
+      <Button width="100%" height="40px" fill type="submit">
         완료
       </Button>
     </StyledForm>

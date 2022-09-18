@@ -77,7 +77,7 @@ const AuthForm = ({ mode }: Props) => {
           <Input name="password" type="password" onChange={handleChange} placeholder={passwordPlaceholder} />
         </InputGroup>
 
-        <Button width="100%" type="submit">
+        <Button width="100%" fill type="submit">
           {buttonText}
         </Button>
 

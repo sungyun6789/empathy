@@ -29,6 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             },
           },
         });
+
         if (!alreadyLike) {
           await prisma.itemLike.create({
             data: {
@@ -36,18 +37,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               itemId: item.id,
             },
           });
-
-          const count = await prisma.itemLike.count({
+        } else {
+          await prisma.itemLike.delete({
             where: {
-              itemId: item.id,
+              itemId_userId: {
+                itemId: item.id,
+                userId: user.id,
+              },
             },
           });
-
-          return res.status(200).json({ count });
-        } else {
-          /** TODO: 좋아요 취소 */
-          return res.status(400).json(undefined);
         }
+
+        const count = await prisma.itemLike.count({
+          where: {
+            itemId: item.id,
+          },
+        });
+
+        return res.status(200).json({ count });
       }
     }
   } catch {

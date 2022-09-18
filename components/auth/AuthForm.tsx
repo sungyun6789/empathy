@@ -1,17 +1,21 @@
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useContext, useMemo } from 'react';
+import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 import { UserContext } from '~/contexts/UserContext';
 import { login, register } from '~/lib/api/auth';
 import { COLORS } from '~/lib/colors';
+import { errorMessage } from '~/lib/error';
 
 import Button from '../system/Button';
 import Input from '../system/Input';
 
 import QuestionLink from './QuestionLink';
+
+import type { ErrorResponse } from '~/lib/error';
 
 interface Props {
   mode: 'login' | 'register';
@@ -48,6 +52,7 @@ const AuthForm = ({ mode }: Props) => {
 
   const { mutate } = useMutation(isLoginMode ? login : register, {
     onSuccess: (response) => {
+      toast.success('로그인에 성공했습니다.');
       if (isLoginMode) {
         user.setState(response);
         return router.push('/');
@@ -55,6 +60,7 @@ const AuthForm = ({ mode }: Props) => {
         return router.push('/auth/login');
       }
     },
+    onError: (error: ErrorResponse) => errorMessage(error),
   });
 
   const { handleChange, handleSubmit } = useFormik<AuthForm>({

@@ -44,10 +44,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         setCookies({ res, type: 'login', accessToken, refreshToken });
         return res.status(200).json(user);
       } else {
-        return res.status(400).json({ error: 'Password do not match' });
+        return res.status(400).json({ error: '비밀번호가 틀렸습니다.' });
       }
     } else {
-      return res.status(400).json({ error: 'User not found' });
+      return res.status(400).json({ error: '존재하지 않는 유저입니다.' });
     }
   } catch {
     return res.status(500).json({ error: 'Internal Server Error' });

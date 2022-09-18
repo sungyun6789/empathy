@@ -1,19 +1,29 @@
 import Link from 'next/link';
 import { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 import { UserContext } from '~/contexts/UserContext';
 import { logout } from '~/lib/api/auth';
+import { errorMessage } from '~/lib/error';
 
 import Button from '../system/Button';
 import WriteButton from '../write/WriteButton';
+
+import type { ErrorResponse } from '~/lib/error';
 
 const AuthButton = () => {
   const { state, setState } = useContext(UserContext);
 
   const { mutate } = useMutation(logout, {
-    onSuccess: () => setState(undefined),
+    onSuccess: () => {
+      setState(undefined);
+      toast.success('로그아웃에 성공했습니다.');
+    },
+    onError: (error: ErrorResponse) => {
+      errorMessage(error);
+    },
   });
 
   return state ? (

@@ -21,11 +21,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       if (req.method === 'POST' && item && user) {
+        const userId = user.id;
+        const itemId = item.id;
+
         const alreadyLike = await prisma.itemLike.findUnique({
           where: {
             itemId_userId: {
-              itemId: item.id,
-              userId: user.id,
+              itemId,
+              userId,
             },
           },
         });
@@ -33,16 +36,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         if (!alreadyLike) {
           await prisma.itemLike.create({
             data: {
-              userId: user.id,
-              itemId: item.id,
+              userId,
+              itemId,
             },
           });
         } else {
           await prisma.itemLike.delete({
             where: {
               itemId_userId: {
-                itemId: item.id,
-                userId: user.id,
+                itemId,
+                userId,
               },
             },
           });
@@ -50,7 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const count = await prisma.itemLike.count({
           where: {
-            itemId: item.id,
+            itemId,
           },
         });
 

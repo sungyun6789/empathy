@@ -41,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(400).json({ error: '유튜브 주소가 아닙니다.' });
           }
 
-          await prisma.item.create({
+          const newItem = await prisma.item.create({
             data: {
               userId: user.id,
               url,
@@ -49,8 +49,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               videoId,
             },
           });
-          // TODO: 글 생성 후 글 상세 페이지로 리다이렉트 할 수 있도록 필요한 데이터 넘기기
-          return res.status(200).json(undefined);
+
+          return res.status(200).json({ id: newItem.id });
         }
       }
     }

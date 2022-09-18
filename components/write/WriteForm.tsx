@@ -18,7 +18,7 @@ type FormType = Pick<Item, 'description' | 'url'>;
 const WriteForm = () => {
   const router = useRouter();
   const { mutate } = useMutation(createItem, {
-    onSuccess: () => router.push('/'),
+    onSuccess: (data) => router.push(`/items?id=${data.data.id}`),
     onError: (error: ErrorResponse) => {
       toast.error(error.response?.data.error ?? '알 수 없는 에러가 발생했습니다.');
     },

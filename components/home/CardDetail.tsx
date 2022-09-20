@@ -4,6 +4,9 @@ import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 
 import { getItemDetails, likeItem } from '~/lib/api/items';
+import { errorMessage } from '~/lib/error';
+
+import type { ErrorResponse } from '~/lib/error';
 
 const CardDetail = () => {
   const { query } = useRouter();
@@ -15,6 +18,7 @@ const CardDetail = () => {
 
   const { mutate } = useMutation(likeItem, {
     onSuccess: () => refetch(),
+    onError: (error: ErrorResponse) => errorMessage(error),
   });
 
   return (

@@ -59,6 +59,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         return res.status(200).json({ count });
       }
+    } else {
+      return res.status(400).json({ error: '해당 기능은 로그인 후에 사용할 수 있습니다.' });
     }
   } catch {
     return res.status(500).json({ error: 'Internal Server Error' });

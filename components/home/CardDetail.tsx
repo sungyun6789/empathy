@@ -10,6 +10,7 @@ import type { ErrorResponse } from '~/lib/error';
 
 const CardDetail = () => {
   const { query } = useRouter();
+
   const id = query.id as string;
 
   const { data, refetch } = useQuery([`/items/${id}`], () => getItemDetails(id), {
@@ -38,7 +39,8 @@ const CardDetail = () => {
       <LikeButton>
         <div>
           <LikeIconWrapper onClick={() => mutate(id)}>
-            <Image src="/like.svg" alt="like" width="17" height="17" />
+            {/* TODO: 이미지 하나로 처리할 수 있도록 변경 필요 */}
+            <Image src={data?.alreadyLike ? '/fill-like.svg' : '/like.svg'} alt="like" width="17" height="17" />
           </LikeIconWrapper>
           <LikeCount>좋아요 {data?.likes}개</LikeCount>
         </div>

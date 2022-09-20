@@ -1,4 +1,5 @@
 import prisma from '~/lib/prisma';
+import { validateToken } from '~/lib/tokens';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -16,7 +17,33 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             itemId: item?.id,
           },
         });
-        return res.status(200).json({ ...item, likes });
+
+        if (!req.cookies.access_token) {
+          return res.status(200).json({ ...item, likes, alreadyLike: false });
+        }
+
+        const { username } = await validateToken(req.cookies.access_token);
+
+        const user = await prisma.user.findUnique({
+          where: {
+            username,
+          },
+        });
+
+        if (!(item && user)) {
+          return res.status(200).json({ ...item, likes, alreadyLike: false });
+        }
+
+        const alreadyLike = await prisma.itemLike.findUnique({
+          where: {
+            itemId_userId: {
+              itemId: item.id,
+              userId: user.id,
+            },
+          },
+        });
+
+        return res.status(200).json({ ...item, likes, alreadyLike: !!alreadyLike });
       }
     }
   } catch {

@@ -9,6 +9,7 @@ export interface ItemModel extends Pick<Item, 'id' | 'description' | 'videoId'> 
 }
 
 interface ItemDetail extends Item {
+  alreadyLike: boolean;
   likes: number;
 }
 

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useMutation, useQuery } from 'react-query';
@@ -24,6 +25,9 @@ const CardDetail = () => {
 
   return (
     <>
+      <Head>
+        <title>공감 - {data?.description}</title>
+      </Head>
       <Block>
         <div>
           <Video

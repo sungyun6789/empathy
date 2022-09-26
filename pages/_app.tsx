@@ -1,5 +1,6 @@
 import 'axios.setting';
 
+import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -17,6 +18,9 @@ const _app = ({ Component, pageProps }: AppProps) => {
       <UserProvider>
         <BasicLayout>
           <GlobalStyle />
+          <Head>
+            <title>공감</title>
+          </Head>
           <Component {...pageProps} />
           <Toaster />
         </BasicLayout>

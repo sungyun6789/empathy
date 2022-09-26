@@ -1,10 +1,11 @@
-import Document from 'next/document';
+/* eslint-disable @next/next/no-title-in-document-head */
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-import type { DocumentContext } from 'next/document';
+import type { DocumentContext, DocumentInitialProps } from 'next/document';
 
 export default class _document extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -28,5 +29,21 @@ export default class _document extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html>
+        <Head>
+          <meta name="title" content="공감"></meta>
+          <meta name="description" content="공감되는 음악 추천 플랫폼"></meta>
+          <meta name="keywords" content="empathy, music, share, youtube, 공감, 음악, 공유, 유튜브"></meta>
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }

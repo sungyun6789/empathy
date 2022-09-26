@@ -26,7 +26,6 @@ const CardDetail = () => {
     <>
       <Block>
         <div>
-          <Description>{data?.description}</Description>
           <Video
             src={`https://www.youtube.com/embed/${data?.videoId}`}
             title="YouTube video player"
@@ -34,6 +33,9 @@ const CardDetail = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
+          <Description>
+            <p>{data?.description}</p>
+          </Description>
         </div>
       </Block>
       <LikeButton>
@@ -57,8 +59,10 @@ const Block = styled.section`
   align-items: center;
 `;
 
-const Description = styled.p`
-  padding: 10px;
+const Description = styled.section`
+  display: flex;
+  justify-content: center;
+  margin: 10px;
 `;
 
 const Video = styled.iframe`
@@ -70,7 +74,7 @@ const LikeButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 20px;
 `;
 
 const LikeIconWrapper = styled.div`

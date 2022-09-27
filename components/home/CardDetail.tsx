@@ -72,6 +72,7 @@ const Description = styled.section`
 const Video = styled.iframe`
   width: 50vh;
   height: 30vh;
+  margin-top: 60px;
 `;
 
 const LikeButton = styled.div`

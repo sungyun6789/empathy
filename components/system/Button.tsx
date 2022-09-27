@@ -7,7 +7,7 @@ import type { ButtonHTMLAttributes } from 'react';
 interface ButtonProps {
   width?: number | string;
   height?: number | string;
-  fill?: boolean;
+  isFill?: boolean;
 }
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonProps {}
@@ -22,15 +22,15 @@ const StyledButton = styled.button<ButtonProps>`
   width: ${(props) => props.width ?? '80px'};
   height: ${(props) => props.height ?? '35px'};
   font-size: 14px;
-  color: ${(props) => (props.fill ? '#ffffff' : COLORS.primary)};
-  background-color: ${(props) => (props.fill ? COLORS.primary : '#ffffff')};
+  color: ${(props) => (props.isFill ? '#ffffff' : COLORS.primary)};
+  background-color: ${(props) => (props.isFill ? COLORS.primary : '#ffffff')};
   border: 1px solid ${COLORS.primary};
   border-radius: 4px;
   transition: 0.3s;
   cursor: pointer;
 
   :hover {
-    color: ${(props) => (props.fill ? COLORS.primary : '#ffffff')};
-    background-color: ${(props) => (props.fill ? '#ffffff' : COLORS.primary)};
+    color: ${(props) => (props.isFill ? COLORS.primary : '#ffffff')};
+    background-color: ${(props) => (props.isFill ? '#ffffff' : COLORS.primary)};
   }
 `;

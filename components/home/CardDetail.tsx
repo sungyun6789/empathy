@@ -1,15 +1,18 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 
+import { UserContext } from '~/contexts/UserContext';
 import { getItemDetails, likeItem } from '~/lib/api/items';
 import { errorMessage } from '~/lib/error';
 
 import type { ErrorResponse } from '~/lib/error';
 
 const CardDetail = () => {
+  const { state } = useContext(UserContext);
   const { query } = useRouter();
 
   const id = query.id as string;
@@ -22,6 +25,10 @@ const CardDetail = () => {
     onSuccess: () => refetch(),
     onError: (error: ErrorResponse) => errorMessage(error),
   });
+
+  useEffect(() => {
+    refetch();
+  }, [state]);
 
   return (
     <>

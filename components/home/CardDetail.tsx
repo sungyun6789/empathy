@@ -70,8 +70,8 @@ const Description = styled.section`
 `;
 
 const Video = styled.iframe`
-  width: 100vw;
-  height: 50vh;
+  width: 50vh;
+  height: 30vh;
 `;
 
 const LikeButton = styled.div`

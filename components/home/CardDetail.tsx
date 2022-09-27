@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
@@ -8,6 +7,8 @@ import styled from 'styled-components';
 import { UserContext } from '~/contexts/UserContext';
 import { getItemDetails, likeItem } from '~/lib/api/items';
 import { errorMessage } from '~/lib/error';
+
+import LikeIcon from '../system/LikeIcon';
 
 import type { ErrorResponse } from '~/lib/error';
 
@@ -52,8 +53,7 @@ const CardDetail = () => {
       <LikeButton>
         <div>
           <LikeIconWrapper onClick={() => mutate(id)}>
-            {/* TODO: 이미지 하나로 처리할 수 있도록 변경 필요 */}
-            <Image src={data?.alreadyLike ? '/fill-like.svg' : '/like.svg'} alt="like" width="17" height="17" />
+            <LikeIcon width="17" height="17" alreadyLike={data?.alreadyLike} />
           </LikeIconWrapper>
           <LikeCount>좋아요 {data?.likes}개</LikeCount>
         </div>

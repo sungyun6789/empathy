@@ -1,8 +1,9 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
 
 import { COLORS } from '~/lib/colors';
+
+import LikeIcon from '../system/LikeIcon';
 
 import type { ItemModel } from '~/lib/api/items';
 
@@ -20,7 +21,7 @@ const Card = ({ item }: Props) => {
           <Description>{item.description}</Description>
           <Footer>
             <div>
-              <Image src="/like.svg" alt="like" width="12" height="11" />
+              <LikeIcon width="12" height="12" />
             </div>
             <CountBlock>{item.itemLikes}</CountBlock>
           </Footer>

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { COLORS } from '~/lib/colors';
-
 const Footer = () => {
   return (
     <Block>
@@ -17,11 +15,11 @@ export default Footer;
 
 const Block = styled.footer`
   position: fixed;
+  left: 0;
   bottom: 0;
   height: 50px;
   width: 100%;
   background-color: white;
-  border-top: 1px solid ${COLORS.primary};
 
   display: flex;
   justify-content: center;

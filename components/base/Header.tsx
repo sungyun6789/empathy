@@ -25,13 +25,12 @@ const Block = styled.header`
   height: 60px;
   padding: 0 20px;
   margin-bottom: 50px;
-  border-bottom: 1px solid ${COLORS.gray0};
   box-sizing: border-box;
 `;
 
 const Title = styled.div`
   color: ${COLORS.primary};
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   cursor: pointer;
 `;

@@ -77,9 +77,19 @@ const Description = styled.section`
 `;
 
 const Video = styled.iframe`
-  width: 50vh;
-  height: 30vh;
+  width: 50vw;
+  height: 50vh;
   margin-top: 60px;
+
+  @media (max-width: 1440px) {
+    width: 60vw;
+    height: 40vh;
+  }
+
+  @media (max-width: 1024px) {
+    width: 70vw;
+    height: 30vh;
+  }
 `;
 
 const LikeButton = styled.div`

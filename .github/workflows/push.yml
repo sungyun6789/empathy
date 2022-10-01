@@ -22,7 +22,7 @@ jobs:
         id: cache
         with:
           path: node_modules
-          key: npm-packages-${{ hasFiles('**/yarn.lock') }}
+          key: npm-packages-${{ hashFiles('**/yarn.lock') }}
 
       - run: npm i -g yarn
 

@@ -6,11 +6,14 @@ on:
       - '**'
 
 jobs:
-  lint:
+  test:
+    name: Test lint, build
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Linux checkout
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -24,24 +27,15 @@ jobs:
           path: node_modules
           key: npm-packages-${{ hashFiles('**/yarn.lock') }}
 
-      - run: npm i -g yarn
+      - name: Install Yarn
+        run: npm i -g yarn
 
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn
 
-      - run: yarn lint
+      - name: Run Lint
+        run: yarn lint
 
-  build:
-    needs: lint
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - run: npm i -g yarn
-      - run: yarn
-      - run: yarn build
+      - name: Run Build
+        run: yarn build

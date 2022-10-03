@@ -40,6 +40,7 @@ const Block = styled.article`
   box-sizing: border-box;
   border: 1px solid ${COLORS.gray0};
   margin: 10px;
+  box-shadow: ${COLORS.gray0} 0px 4px 16px 0px;
   cursor: pointer;
 `;
 

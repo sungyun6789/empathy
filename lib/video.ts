@@ -6,8 +6,7 @@ export const videoIdParser = (url: string) => {
     } else {
       return url.split('watch?v=')[1];
     }
-  }
-  else if (url.startsWith('https://youtu.be/')) {
+  } else if (url.startsWith('https://youtu.be/')) {
     /** 재생목록 안에 있는 주소 파싱 */
     if (url.includes('&list')) {
       return url.split('&list')[0].split('youtu.be/')[1];
